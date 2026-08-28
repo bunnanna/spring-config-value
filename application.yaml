@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${postgres.host}/${postgres.port}
+    username: ${postgres.username}
+    password: ${postgres.password}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://customer-service:8080/customer-service/.well-known/jwks.json
+  kafka:
+    template:
+      observation-enabled: false
+    listener:
+      observation-enabled: false
+
+postgres:
+  host: postgres-postgresql.postgres.svc
+  port: 5432
+  database: ""
+  username: ""
+  password: ""
+
+vault:
+  uri: http://vault.vault.svc:8200
+  kubernetes:
+    role: ""
+  transit:
+    key-name: bank-demo-auth-jwt
+
+security:
+  public-paths:
+    - path: /customer-service/v1/customers
+      method: POST
+    - path: /customer-service/v1/tokens
+      method: POST
+    - path: /customer-service/.well-known/jwks.json
+      method: GET
+
+management:
+  tracing:
+    enabled: true
+  otlp:
+    tracing:
+      endpoint: http://otel-collector-opentelemetry-collector.monitoring.svc.cluster.local:4317
+      transport: grpc

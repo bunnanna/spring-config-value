@@ -1,0 +1,7 @@
+jwt:
+  exp: 84000
+vault:
+  kubernetes:
+    role: bank-demo-customer-service-vso
+postgres:
+  database: bank_demo_customer_db
