@@ -1,4 +1,5 @@
-file_format: "0.3"
+# OpenTelemetry declarative configuration, consumed by otel agent auto-instrumentation.
+file_format: "1.1"
 
 otpl:
     host: http://otel-collector-opentelemetry-collector.monitoring.svc
@@ -14,28 +15,22 @@ tracer_provider:
   processors:
     - batch:
         exporter:
-          otlp:
-            protocol: grpc
+          otlp_grpc:
             endpoint: ${otpl.host}:4317
   sampler:
-    parent_based:
-      root:
-        trace_id_ratio_based:
-          ratio: 0.1
+    always_on: {}
 
 meter_provider:
   readers:
     - periodic:
         interval: 15000
         exporter:
-          otlp:
-            protocol: grpc
-            endpoint: ${otpl.host}
+          otlp_grpc:
+            endpoint: ${otpl.host}:4317
 
 logger_provider:
   processors:
     - batch:
         exporter:
-          otlp:
-            protocol: grpc
-            endpoint: ${otpl.host}
+          otlp_grpc:
+            endpoint: ${otpl.host}:4317
