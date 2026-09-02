@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${postgres.host}/${postgres.port}
+    url: jdbc:postgresql://${postgres.host}:${postgres.port}/${postgres.database}
     username: ${postgres.username}
     password: ${postgres.password}
   security:
