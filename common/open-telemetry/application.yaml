@@ -17,8 +17,7 @@ tracer_provider:
         exporter:
           otlp_grpc:
             endpoint: ${otpl.host}:4317
-  sampler:
-    always_on: {}
+  sampler: always_on
 
 meter_provider:
   readers:
