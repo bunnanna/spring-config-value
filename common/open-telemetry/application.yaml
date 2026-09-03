@@ -11,6 +11,11 @@ resource:
     - name: deployment.namespace
       value: ${POD_NAMESPACE}
 
+propagator:
+  composite:
+    - tracecontext
+    - baggage
+
 tracer_provider:
   processors:
     - batch:
