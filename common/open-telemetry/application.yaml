@@ -18,7 +18,8 @@ tracer_provider:
           otlp_grpc:
             endpoint: ${otpl.host}:4317
   sampler:
-    always_on: null
+    trace_id_ratio_based:
+      ratio: 1.0
 
 meter_provider:
   readers:
