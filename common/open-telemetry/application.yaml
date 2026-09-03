@@ -13,8 +13,8 @@ resource:
 
 propagator:
   composite:
-    - tracecontext
-    - baggage
+    - tracecontext: {}
+    - baggage: {}
 
 tracer_provider:
   processors:
